@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sivora – Software, AI, Digital Marketing, Video Editing & Graphic Design</title>
+  <meta name="description"
+    content="Sivora builds custom software, AI products, digital marketing, video editing and graphic design for growing businesses.">
+  <meta property="og:title" content="Sivora – Build • Innovate • Grow">
+  <meta property="og:description" content="Software, AI, marketing, video editing and graphic design.">
+  <link rel="icon" href="img/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #071B3A;
+      --blue: #087FE8;
+      --cyan: #00C9C8;
+      --teal: #16D5B5;
+      --bg: #fff;
+      --alt: #F4F7FA;
+      --ink: #071B3A;
+      --mut: #566581;
+      --line: #dfe6ee;
+      --wa: #25D366;
+    }
+
+    @media(prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #061225;
+        --alt: #0a1a33;
+        --ink: #eef3fa;
+        --mut: #9fb0c8;
+        --line: #16294a
+      }
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px
+    }
+
+    body {
+      margin: 0;
+      font-family: Manrope, system-ui, Segoe UI, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--teal);
+      outline-offset: 3px
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px
+    }
+
+    /* ---------- header ---------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: calc(14px + env(safe-area-inset-top, 0px)) 22px 14px;
+      color: #fff;
+      transition: background .3s, padding .3s
+    }
+
+    header:before {
+      content: "";
+      position: absolute;
+      inset: 0 0 -40px;
+      background: linear-gradient(rgba(7, 27, 58, .85), transparent);
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity .3s
+    }
+
+    header.sc {
+      background: rgba(7, 27, 58, .96);
+      padding-top: calc(8px + env(safe-area-inset-top, 0px));
+      padding-bottom: 8px
+    }
+
+    header.sc:before {
+      opacity: 0
+    }
+
+    .logo {
+      display: block;
+      background: #fff;
+      border-radius: 16px;
+      padding: 8px 20px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .3);
+      transition: transform .25s
+    }
+
+    .logo:hover {
+      transform: scale(1.04)
+    }
+
+    .logo img {
+      height: 58px;
+      width: auto;
+      display: block
+    }
+
+    header.sc .logo img {
+      height: 48px
+    }
+
+    nav {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      font-weight: 600;
+      font-size: .98rem
+    }
+
+    nav a:not(.btn) {
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .5);
+      position: relative
+    }
+
+    nav a:not(.btn):after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      height: 2px;
+      width: 0;
+      background: var(--teal);
+      transition: width .25s
+    }
+
+    nav a:not(.btn):hover:after {
+      width: 100%
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 26px;
+      border-radius: 99px;
+      font: inherit;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(8, 127, 232, .35)
+    }
+
+    .p {
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      color: #fff
+    }
+
+    .g {
+      border: 1.5px solid rgba(255, 255, 255, .55);
+      color: #fff;
+      margin-left: 8px
+    }
+
+    .g:hover {
+      box-shadow: none;
+      background: rgba(255, 255, 255, .12)
+    }
+
+    /* ---------- video banners (hero + AI) ---------- */
+    .hero {
+      position: relative;
+      height: 100vh;
+      height: 100svh;
+      min-height: 580px;
+      color: #fff;
+      background: var(--navy);
+      overflow: hidden
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .9s, visibility .9s
+    }
+
+    .slide.on {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2
+    }
+
+    .bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: var(--navy) center/cover no-repeat
+    }
+
+    .slide:after,
+    .ban:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(7, 27, 58, .88), rgba(7, 27, 58, .25));
+      pointer-events: none
+    }
+
+    .slide .wrap,
+    .ban .wrap {
+      position: relative;
+      z-index: 3;
+      width: 100%
+    }
+
+    .tag {
+      color: var(--teal);
+      font-weight: 800;
+      letter-spacing: .14em;
+      font-size: .82rem;
+      text-transform: uppercase
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 6.2vw, 4.8rem);
+      line-height: 1.05;
+      margin: .4em 0;
+      font-weight: 800;
+      max-width: 15ch
+    }
+
+    .slide p,
+    .ban p {
+      max-width: 48ch;
+      font-size: 1.1rem;
+      color: #d4e3f6;
+      margin: 0 0 28px
+    }
+
+    /* hero text enters when slide becomes active */
+    .slide .tag,
+    .slide h1,
+    .slide p,
+    .slide .acts {
+      opacity: 0;
+      transform: translateY(34px)
+    }
+
+    .slide.on .tag,
+    .slide.on h1,
+    .slide.on p,
+    .slide.on .acts {
+      animation: up .8s cubic-bezier(.2, .7, .2, 1) forwards
+    }
+
+    .slide.on h1 {
+      animation-delay: .15s
+    }
+
+    .slide.on p {
+      animation-delay: .3s
+    }
+
+    .slide.on .acts {
+      animation-delay: .45s
+    }
+
+    @keyframes up {
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .dots {
+      position: absolute;
+      z-index: 5;
+      left: 22px;
+      right: 22px;
+      bottom: calc(26px + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      gap: 18px;
+      max-width: 1076px;
+      margin: 0 auto
+    }
+
+    .dots button {
+      flex: 1;
+      max-width: 220px;
+      background: none;
+      border: 0;
+      color: #fff;
+      opacity: .6;
+      font: 700 .85rem Manrope, sans-serif;
+      text-align: left;
+      cursor: pointer;
+      padding: 8px 0 0;
+      position: relative
+    }
+
+    .dots button:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, .28);
+      border-radius: 3px
+    }
+
+    .dots button i {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      background: var(--teal);
+      border-radius: 3px
+    }
+
+    .dots button.on {
+      opacity: 1
+    }
+
+    .dots button.on i {
+      animation: fill 8s linear forwards
+    }
+
+    @keyframes fill {
+      to {
+        width: 100%
+      }
+    }
+
+    .scroll {
+      position: absolute;
+      z-index: 5;
+      right: 26px;
+      bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+      width: 26px;
+      height: 42px;
+      border: 2px solid rgba(255, 255, 255, .6);
+      border-radius: 14px
+    }
+
+    .scroll:after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      width: 4px;
+      height: 8px;
+      margin-left: -2px;
+      border-radius: 3px;
+      background: #fff;
+      animation: wheel 1.6s infinite
+    }
+
+    @keyframes wheel {
+      60% {
+        transform: translateY(14px);
+        opacity: 0
+      }
+
+      100% {
+        opacity: 0
+      }
+    }
+
+    /* ---------- sections ---------- */
+    section {
+      padding: 96px 0
+    }
+
+    section.alt {
+      background: var(--alt)
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.12;
+      margin: .3em 0 .8em;
+      font-weight: 800;
+      max-width: 20ch
+    }
+
+    .eb {
+      color: var(--blue);
+      font-weight: 800;
+      letter-spacing: .14em;
+      font-size: .82rem;
+      text-transform: uppercase
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 70px 1fr 1.4fr;
+      gap: 20px;
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+      position: relative;
+      transition: padding .25s
+    }
+
+    .row:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -1px;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      transition: width .5s
+    }
+
+    .row:hover {
+      padding-left: 14px
+    }
+
+    .row:hover:after {
+      width: 100%
+    }
+
+    .row b {
+      color: var(--blue)
+    }
+
+    .row h3 {
+      margin: 0;
+      font-size: 1.5rem
+    }
+
+    .row p {
+      margin: 0;
+      color: var(--mut)
+    }
+
+    .row ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0;
+      margin: 12px 0 0
+    }
+
+    .row li {
+      font-size: .82rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 99px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--ink)
+    }
+
+    /* ---------- AI video editing: 3 banner sections ---------- */
+    .aihead {
+      background: var(--navy);
+      color: #fff;
+      padding: 96px 0 56px
+    }
+
+    .aihead h2 {
+      max-width: 22ch
+    }
+
+    .aihead p {
+      color: #b9cbe3;
+      max-width: 56ch;
+      margin: 0
+    }
+
+    .ban {
+      position: relative;
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      background: var(--navy);
+      overflow: hidden;
+      padding: 80px 0
+    }
+
+    .ban.r:after {
+      background: linear-gradient(270deg, rgba(7, 27, 58, .88), rgba(7, 27, 58, .25))
+    }
+
+    .ban.r .txt {
+      margin-left: auto
+    }
+
+    .ban h2 {
+      max-width: 14ch;
+      font-size: clamp(2rem, 5vw, 3.6rem)
+    }
+
+    .txt {
+      max-width: 520px
+    }
+
+    .chips {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .chips li {
+      padding: 7px 16px;
+      border: 1px solid rgba(255, 255, 255, .3);
+      border-radius: 99px;
+      font-size: .88rem;
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+      background: rgba(7, 27, 58, .35);
+      transition: .2s
+    }
+
+    .chips li:hover {
+      background: var(--teal);
+      color: var(--navy);
+      border-color: var(--teal)
+    }
+
+    .num {
+      position: absolute;
+      z-index: 2;
+      right: 4%;
+      bottom: -30px;
+      font-size: clamp(8rem, 22vw, 18rem);
+      font-weight: 800;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(255, 255, 255, .16);
+      pointer-events: none
+    }
+
+    .ban.r .num {
+      right: auto;
+      left: 4%
+    }
+
+    .tl {
+      margin-top: 4px;
+      position: relative;
+      height: 74px;
+      border-radius: 10px;
+      background: rgba(7, 27, 58, .7);
+      border: 1px solid rgba(255, 255, 255, .15);
+      overflow: hidden;
+      max-width: 460px
+    }
+
+    .tl div {
+      position: absolute;
+      height: 16px;
+      border-radius: 4px;
+      font: 700 .6rem/16px Manrope, sans-serif;
+      padding-left: 6px;
+      white-space: nowrap;
+      color: var(--navy)
+    }
+
+    .tl .a {
+      top: 7px;
+      left: 3%;
+      width: 40%;
+      background: var(--blue);
+      color: #fff
+    }
+
+    .tl .b {
+      top: 7px;
+      left: 45%;
+      width: 28%;
+      background: var(--cyan)
+    }
+
+    .tl .c {
+      top: 7px;
+      left: 75%;
+      width: 22%;
+      background: #1c6fd1;
+      color: #fff
+    }
+
+    .tl .d {
+      top: 28px;
+      left: 10%;
+      width: 55%;
+      background: var(--teal)
+    }
+
+    .tl .e {
+      top: 49px;
+      left: 3%;
+      width: 94%;
+      background: repeating-linear-gradient(90deg, #3a62a0 0 3px, transparent 3px 7px)
+    }
+
+    .tl .ph {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 2px;
+      height: auto;
+      background: #fff;
+      box-shadow: 0 0 10px #fff;
+      animation: scan 5s linear infinite
+    }
+
+    @keyframes scan {
+      to {
+        left: 100%
+      }
+    }
+
+    /* ---------- team ---------- */
+    .team {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px
+    }
+
+    .m {
+      background: var(--alt);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 30px 26px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s
+    }
+
+    .m:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(7, 27, 58, .14)
+    }
+
+    .m:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      transform: scaleX(.25);
+      transform-origin: left;
+      transition: transform .4s
+    }
+
+    .m:hover:before {
+      transform: scaleX(1)
+    }
+
+    .av {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      margin-bottom: 18px;
+      position: relative
+    }
+
+    .av:after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px dashed var(--cyan);
+      opacity: .6;
+      animation: spin 14s linear infinite
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .m h3 {
+      margin: 0;
+      font-size: 1.3rem
+    }
+
+    .m .role {
+      color: var(--blue);
+      font-weight: 700;
+      font-size: .95rem;
+      margin: 2px 0 12px
+    }
+
+    .m p {
+      margin: 0 0 14px;
+      color: var(--mut);
+      font-size: .95rem
+    }
+
+    .m ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px
+    }
+
+    .m li {
+      font-size: .78rem;
+      font-weight: 600;
+      padding: 3px 11px;
+      border-radius: 99px;
+      background: var(--bg);
+      border: 1px solid var(--line)
+    }
+
+    .m a.wl {
+      font-weight: 700;
+      font-size: .9rem;
+      color: #128C7E
+    }
+
+    .m a.wl:hover {
+      text-decoration: underline
+    }
+
+    /* ---------- contact ---------- */
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 760px
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--ink);
+      font: inherit;
+      transition: border-color .2s, box-shadow .2s
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 0;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(8, 127, 232, .15)
+    }
+
+    textarea,
+    .full {
+      grid-column: 1/-1
+    }
+
+    .ct {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px
+    }
+
+    .ct a {
+      font-weight: 700;
+      padding: 12px 22px;
+      border-radius: 99px;
+      border: 1.5px solid var(--line);
+      transition: .2s
+    }
+
+    .ct a.w {
+      background: var(--wa);
+      border-color: var(--wa);
+      color: #fff
+    }
+
+    .ct a:hover {
+      transform: translateY(-2px)
+    }
+
+    footer {
+      background: var(--navy);
+      color: #9fb6d6;
+      padding: 44px 0 calc(44px + env(safe-area-inset-bottom, 0px));
+      text-align: center;
+      font-size: .9rem
+    }
+
+    footer img {
+      height: 48px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 6px 16px;
+      margin-bottom: 14px
+    }
+
+    /* scroll reveal */
+    .rv {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s, transform .7s
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: none
+    }
+
+    .d1 {
+      transition-delay: .12s
+    }
+
+    .d2 {
+      transition-delay: .24s
+    }
+
+    .d3 {
+      transition-delay: .36s
+    }
+
+    /* ---------- floating WhatsApp + chatbot ---------- */
+    .fab {
+      position: fixed;
+      right: 20px;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-end
+    }
+
+    .fab button,
+    .fab a.wa {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 0;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .3);
+      transition: transform .2s;
+      position: relative
+    }
+
+    .fab button:hover,
+    .fab a.wa:hover {
+      transform: scale(1.1)
+    }
+
+    .fab a.wa {
+      background: var(--wa)
+    }
+
+    .fab a.wa:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--wa);
+      z-index: -1;
+      animation: ping 2.2s infinite
+    }
+
+    @keyframes ping {
+      to {
+        transform: scale(1.7);
+        opacity: 0
+      }
+    }
+
+    .fab button {
+      background: linear-gradient(135deg, var(--blue), var(--cyan))
+    }
+
+    .fab svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor
+    }
+
+    .bot {
+      position: fixed;
+      right: 20px;
+      bottom: calc(160px + env(safe-area-inset-bottom, 0px));
+      z-index: 60;
+      width: min(360px, calc(100vw - 40px));
+      height: min(500px, calc(100vh - 200px));
+      background: var(--bg);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateY(24px) scale(.96);
+      opacity: 0;
+      visibility: hidden;
+      transform-origin: bottom right;
+      transition: .3s
+    }
+
+    .bot.open {
+      transform: none;
+      opacity: 1;
+      visibility: visible
+    }
+
+    .bh {
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      color: #fff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .bh b {
+      display: block;
+      line-height: 1.2
+    }
+
+    .bh small {
+      opacity: .9
+    }
+
+    .bh .x {
+      margin-left: auto;
+      background: none;
+      border: 0;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1
+    }
+
+    .bh .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #7CFFB2;
+      box-shadow: 0 0 0 4px rgba(124, 255, 178, .3)
+    }
+
+    .msgs {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--alt)
+    }
+
+    .msg {
+      max-width: 86%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: .93rem;
+      line-height: 1.45;
+      animation: pop .3s
+    }
+
+    .msg.b {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-bottom-left-radius: 4px;
+      align-self: flex-start
+    }
+
+    .msg.u {
+      background: var(--blue);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+      align-self: flex-end
+    }
+
+    .msg a {
+      color: #128C7E;
+      font-weight: 700;
+      text-decoration: underline
+    }
+
+    @keyframes pop {
+      from {
+        opacity: 0;
+        transform: translateY(8px)
+      }
+    }
+
+    .qr {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px 12px 0;
+      background: var(--alt)
+    }
+
+    .qr button {
+      font: 600 .8rem Manrope, sans-serif;
+      padding: 6px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--blue);
+      background: var(--bg);
+      color: var(--blue);
+      cursor: pointer;
+      transition: .2s
+    }
+
+    .qr button:hover {
+      background: var(--blue);
+      color: #fff
+    }
+
+    .bf {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid var(--line);
+      background: var(--bg)
+    }
+
+    .bf input {
+      padding: 10px 14px;
+      border-radius: 99px
+    }
+
+    .bf button {
+      border: 0;
+      border-radius: 99px;
+      padding: 0 18px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer
+    }
+
+    .typing span {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin: 0 2px;
+      border-radius: 50%;
+      background: var(--mut);
+      animation: bl 1s infinite
+    }
+
+    .typing span:nth-child(2) {
+      animation-delay: .15s
+    }
+
+    .typing span:nth-child(3) {
+      animation-delay: .3s
+    }
+
+    @keyframes bl {
+
+      0%,
+      80%,
+      100% {
+        opacity: .25
+      }
+
+      40% {
+        opacity: 1
+      }
+    }
+
+    @media(max-width:860px) {
+      nav a:not(.btn) {
+        display: none
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 8px
+      }
+
+      .team {
+        grid-template-columns: 1fr
+      }
+
+      form {
+        grid-template-columns: 1fr
+      }
+
+      section {
+        padding: 64px 0
+      }
+
+      .aihead {
+        padding: 64px 0 36px
+      }
+
+      .logo img {
+        height: 44px
+      }
+
+      header.sc .logo img {
+        height: 38px
+      }
+
+      .logo {
+        padding: 6px 14px;
+        border-radius: 13px
+      }
+
+      .ban {
+        min-height: 70vh
+      }
+
+      .ban.r .txt {
+        margin-left: 0
+      }
+
+      .scroll {
+        display: none
+      }
+
+      .g {
+        margin: 10px 0 0
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *:before,
+      *:after {
+        animation: none !important;
+        transition: none !important
+      }
+
+      .rv,
+      .slide .tag,
+      .slide h1,
+      .slide p,
+      .slide .acts {
+        opacity: 1;
+        transform: none
+      }
+
+      .dots button.on i {
+        width: 100%
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header id="hd">
+    <a href="#top" class="logo" aria-label="Sivora home"><img src="img/logo.webp" alt="Sivora – Build Innovate Grow"
+        width="700" height="212"></a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#ai">AI Video</a>
+      <a href="#team">Team</a>
+      <a href="#contact" class="btn p">Start a Project</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <div class="hero" id="hero">
+      <div class="slide on">
+        <video class="bg" muted loop playsinline preload="auto" poster="videos/software-development.jpg"
+          data-src="videos/software-development.mp4"></video>
+        <div class="wrap">
+          <div class="tag">Custom Software Development</div>
+          <h1>We turn bold ideas into powerful digital products.</h1>
+          <p>Custom web platforms, business software, mobile apps and scalable systems built around the way your
+            business works.</p>
+          <div class="acts"><a href="#contact" class="btn p">Start a Project</a><a href="#services"
+              class="btn g">Explore Services</a></div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <video class="bg" muted loop playsinline preload="metadata" poster="videos/marketing-video-editing.jpg"
+          data-src="videos/marketing-video-editing.mp4"></video>
+        <div class="wrap">
+          <div class="tag">Video Editing &amp; Graphic Design</div>
+          <h1>Content that stops the scroll and sells.</h1>
+          <p>Reels, ads, product videos, posters, social creatives and brand identity, edited and designed by people
+            who care about the details.</p>
+          <div class="acts"><a href="#contact" class="btn p">Create Content</a><a href="#ai"
+              class="btn g">See Video Work</a></div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <video class="bg" muted loop playsinline preload="metadata" poster="videos/ai-video.jpg"
+          data-src="videos/ai-video.mp4"></video>
+        <div class="wrap">
+          <div class="tag">AI-Powered Digital Solutions</div>
+          <h1>Smarter software. Faster decisions. Bigger possibilities.</h1>
+          <p>AI-integrated applications, chatbots, intelligent automation and analytics dashboards built for the
+            future.</p>
+          <div class="acts"><a href="#contact" class="btn p">Build With AI</a><a href="#services"
+              class="btn g">Discover AI Solutions</a></div>
+        </div>
+      </div>
+
+      <div class="dots">
+        <button class="on" data-i="0">Software<i></i></button>
+        <button data-i="1">Video &amp; Design<i></i></button>
+        <button data-i="2">AI Solutions<i></i></button>
+      </div>
+      <div class="scroll" aria-hidden="true"></div>
+    </div>
+
+    <!-- ================= SERVICES ================= -->
+    <section id="services" class="alt">
+      <div class="wrap">
+        <div class="eb">What we do</div>
+        <h2 class="rv">Everything your brand needs, done well.</h2>
+
+        <div class="row rv"><b>01</b>
+          <h3>Software Development</h3>
+          <div>
+            <p>Websites, CMS, CRM, ERP, POS and billing, mobile apps and APIs, built in the technology that fits your
+              problem.</p>
+            <ul>
+              <li>Laravel</li>
+              <li>React</li>
+              <li>Node.js</li>
+              <li>Flutter</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row rv"><b>02</b>
+          <h3>AI &amp; Automation</h3>
+          <div>
+            <p>Chatbots, smart search and workflow automation added to new or existing systems.</p>
+            <ul>
+              <li>Chatbots</li>
+              <li>Smart search</li>
+              <li>Workflow automation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row rv"><b>03</b>
+          <h3>Digital Marketing</h3>
+          <div>
+            <p>SEO, social media management and campaigns that bring the right customers to your business.</p>
+            <ul>
+              <li>SEO</li>
+              <li>Social media</li>
+              <li>Ads &amp; campaigns</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row rv"><b>04</b>
+          <h3>Video Editing</h3>
+          <div>
+            <p>Reels, shorts, ads, product and brand videos, plus AI video generation when you need speed.</p>
+            <ul>
+              <li>Reels &amp; shorts</li>
+              <li>Ad films</li>
+              <li>AI video</li>
+              <li>Captions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row rv"><b>05</b>
+          <h3>Graphic Design</h3>
+          <div>
+            <p>Logos, brand kits, posters, social media creatives, brochures and UI/UX design that look consistent
+              everywhere.</p>
+            <ul>
+              <li>Logo &amp; branding</li>
+              <li>Social creatives</li>
+              <li>Posters &amp; print</li>
+              <li>UI/UX</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= AI VIDEO EDITING (3 banner sections) ================= -->
+    <div id="ai">
+      <div class="aihead">
+        <div class="wrap">
+          <div class="tag">AI Video Editing</div>
+          <h2 class="rv">Edit at the speed of ideas.</h2>
+          <p class="rv d1">Our editors work with AI tools to turn raw footage or a simple script into polished videos in
+            a fraction of the usual time. Here is how it works.</p>
+        </div>
+      </div>
+
+      <section class="ban" style="padding:80px 0">
+        <video class="bg" muted loop playsinline preload="none" poster="videos/ai-video.jpg"
+          data-src="videos/ai-video.mp4"></video>
+        <div class="wrap">
+          <div class="txt rv">
+            <div class="tag">Script to video</div>
+            <h2>Start with words. Get a finished video.</h2>
+            <p>Send us a script or even a rough idea. We generate scenes, add voiceover and music, and cut it into a
+              video ready to post.</p>
+            <ul class="chips">
+              <li>Script writing</li>
+              <li>AI scenes</li>
+              <li>AI voiceover</li>
+              <li>Music &amp; sound</li>
+            </ul>
+            <a href="#contact" class="btn p">Create a Video</a>
+          </div>
+        </div>
+        <div class="num" aria-hidden="true">01</div>
+      </section>
+
+      <section class="ban r" style="padding:80px 0">
+        <video class="bg" muted loop playsinline preload="none" poster="videos/marketing-video-editing.jpg"
+          data-src="videos/marketing-video-editing.mp4"></video>
+        <div class="wrap">
+          <div class="txt rv">
+            <div class="tag">Reels, shorts &amp; ads</div>
+            <h2>Raw footage in. Scroll-stopping edits out.</h2>
+            <p>We cut your footage for Instagram, YouTube and ads, with auto captions, smooth transitions, colour
+              grading and background removal.</p>
+            <ul class="chips">
+              <li>Auto captions</li>
+              <li>Reels &amp; shorts</li>
+              <li>Colour grading</li>
+              <li>Background removal</li>
+            </ul>
+            <div class="tl" aria-hidden="true">
+              <div class="a">Intro</div>
+              <div class="b">Product</div>
+              <div class="c">Outro</div>
+              <div class="d">Auto captions</div>
+              <div class="e"></div><span class="ph tl-ph" style="position:absolute"></span>
+            </div>
+          </div>
+        </div>
+        <div class="num" aria-hidden="true">02</div>
+      </section>
+
+      <section class="ban" style="padding:80px 0">
+        <video class="bg" muted loop playsinline preload="none" poster="videos/ai-video-2.jpg"
+          data-src="videos/ai-video-2.mp4"></video>
+        <div class="wrap">
+          <div class="txt rv">
+            <div class="tag">Brand &amp; product videos</div>
+            <h2>One idea, every format your brand needs.</h2>
+            <p>Product launches, explainers and brand stories, delivered in square, vertical and wide sizes so one
+              shoot works on every platform.</p>
+            <ul class="chips">
+              <li>Product videos</li>
+              <li>Explainers</li>
+              <li>Brand stories</li>
+              <li>Multi-size export</li>
+            </ul>
+            <a href="#contact" class="btn p">Get a Quote</a>
+          </div>
+        </div>
+        <div class="num" aria-hidden="true">03</div>
+      </section>
+    </div>
+
+    <!-- ================= TEAM ================= -->
+    <section id="team">
+      <div class="wrap">
+        <div class="eb">Team</div>
+        <h2 class="rv">One team. Many specialists.</h2>
+        <div class="team">
+          <article class="m rv">
+            <div class="av">MM</div>
+            <h3>Madhu Mahesh</h3>
+            <div class="role">Tech Support &amp; Founder</div>
+            <p>Leads delivery and keeps every project running smoothly, from the first call to long-term support.</p>
+            <ul>
+              <li>Software</li>
+              <li>Support</li>
+              <li>Strategy</li>
+            </ul>
+            <a class="wl" href="https://wa.me/919121766628?text=Hi%20Madhu%2C%20I%20want%20to%20talk%20about%20a%20project"
+              target="_blank" rel="noopener">Message on WhatsApp</a>
+          </article>
+          <article class="m rv d1">
+            <div class="av">RB</div>
+            <h3>Rambabu</h3>
+            <div class="role">Digital &amp; Social Media Expert</div>
+            <p>Plans content and campaigns that grow your reach, followers and enquiries.</p>
+            <ul>
+              <li>SEO</li>
+              <li>Social media</li>
+              <li>Campaigns</li>
+            </ul>
+            <a class="wl" href="https://wa.me/919121766628?text=Hi%20Rambabu%2C%20I%20need%20help%20with%20digital%20marketing"
+              target="_blank" rel="noopener">Message on WhatsApp</a>
+          </article>
+          <article class="m rv d2">
+            <div class="av">RH</div>
+            <h3>Rahul</h3>
+            <div class="role">UI/UX, Graphic Design &amp; AI Video</div>
+            <p>Designs interfaces, brand graphics and AI-generated videos that look sharp on every screen.</p>
+            <ul>
+              <li>UI/UX</li>
+              <li>Graphic design</li>
+              <li>AI video</li>
+            </ul>
+            <a class="wl" href="https://wa.me/919121766628?text=Hi%20Rahul%2C%20I%20need%20a%20design%20or%20video"
+              target="_blank" rel="noopener">Message on WhatsApp</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="alt">
+      <div class="wrap">
+        <div class="eb">Contact</div>
+        <h2 class="rv">Let's build something that matters.</h2>
+        <form id="f" class="rv">
+          <input name="name" placeholder="Name" required aria-label="Name">
+          <input name="phone" type="tel" placeholder="Phone" aria-label="Phone">
+          <select name="type" class="full" aria-label="Project type">
+            <option>Software Development</option>
+            <option>AI &amp; Automation</option>
+            <option>Digital Marketing</option>
+            <option>Video Editing</option>
+            <option>Graphic Design</option>
+          </select>
+          <textarea name="msg" rows="4" placeholder="Tell us about your project" aria-label="Project description"></textarea>
+          <button class="btn p full" type="submit">Send on WhatsApp</button>
+        </form>
+        <div class="ct">
+          <a class="w" href="https://wa.me/919121766628" target="_blank" rel="noopener">WhatsApp +91 91217 66628</a>
+          <a href="tel:+919121766628">Call +91 91217 66628</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <img src="img/logo.webp" alt="Sivora"><br>
+    Build • Innovate • Grow
+  </footer>
+
+  <!-- ================= WHATSAPP + CHATBOT ================= -->
+  <div class="fab">
+    <button id="botBtn" aria-label="Open chat assistant" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
+      </svg>
+    </button>
+    <a class="wa" href="https://wa.me/919121766628?text=Hi%20Sivora%2C%20I%20want%20to%20know%20more%20about%20your%20services"
+      target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path
+          d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.2 1.62 6.02L4 29l8.12-1.6a12 12 0 0 0 3.92.66C22.68 28.06 28 22.66 28 16.02 28 9.4 22.68 3 16.04 3zm0 22.04c-1.24 0-2.44-.3-3.5-.88l-.5-.28-4.82.94.98-4.7-.3-.52a9.9 9.9 0 0 1-1.5-5.28c0-5.5 4.5-10 10-10s10 4.5 10 10-4.4 9.72-10.36 9.72zm5.5-7.44c-.3-.16-1.8-.9-2.08-1-.28-.1-.48-.16-.68.16-.2.3-.78 1-.96 1.2-.18.2-.36.22-.66.08-.3-.16-1.28-.48-2.44-1.5-.9-.8-1.5-1.8-1.7-2.1-.18-.3 0-.46.14-.62.14-.14.3-.36.46-.54.16-.18.2-.3.3-.5.1-.2.06-.38-.02-.54-.08-.16-.68-1.64-.94-2.24-.24-.58-.5-.5-.68-.5h-.58c-.2 0-.54.08-.82.38-.28.3-1.08 1.06-1.08 2.58s1.1 3 1.26 3.2c.16.2 2.18 3.3 5.26 4.62.74.32 1.3.5 1.76.64.74.24 1.4.2 1.94.12.6-.1 1.8-.74 2.06-1.46.26-.72.26-1.34.18-1.46-.08-.14-.28-.22-.58-.38z" />
+      </svg>
+    </a>
+  </div>
+
+  <div class="bot" id="bot" role="dialog" aria-label="Sivora chat assistant">
+    <div class="bh"><span class="dot"></span>
+      <div><b>Sivora Assistant</b><small>Usually replies instantly</small></div>
+      <button class="x" id="botX" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
+    <div class="qr" id="qr"></div>
+    <form class="bf" id="bf">
+      <input id="bi" placeholder="Type your question..." autocomplete="off" aria-label="Your message">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    (function () {
+      var WA = '919121766628';
+
+      /* ---------- header shrink on scroll ---------- */
+      var hd = document.getElementById('hd');
+      function sc() { hd.classList.toggle('sc', window.scrollY > 40) }
+      window.addEventListener('scroll', sc, { passive: true }); sc();
+
+      /* ---------- video loading: smooth playback ----------
+         Each video gets its src once, buffers ahead, and only plays while visible. */
+      function load(v) {
+        if (!v.getAttribute('src') && v.dataset.src) { v.src = v.dataset.src; v.load(); }
+      }
+      function play(v) { load(v); var p = v.play(); if (p && p.catch) p.catch(function () { }); }
+
+      /* ---------- hero slider ---------- */
+      var slides = [].slice.call(document.querySelectorAll('.slide'));
+      var dots = [].slice.call(document.querySelectorAll('.dots button'));
+      var cur = 0, timer, heroVisible = true;
+
+      function show(n) {
+        cur = n;
+        slides.forEach(function (s, k) {
+          var v = s.querySelector('video');
+          s.classList.toggle('on', k === n);
+          if (k === n) { if (heroVisible) play(v); }
+          else if (v) { setTimeout(function () { if (!s.classList.contains('on')) v.pause(); }, 950); }
+        });
+        dots.forEach(function (b, k) {
+          b.classList.remove('on'); void b.offsetWidth; b.classList.toggle('on', k === n);
+        });
+        /* warm up the next video so the cross-fade never waits */
+        var nx = slides[(n + 1) % slides.length].querySelector('video'); load(nx);
+      }
+      function loop() { clearInterval(timer); timer = setInterval(function () { if (heroVisible) show((cur + 1) % slides.length) }, 8000); }
+      dots.forEach(function (b, k) { b.onclick = function () { show(k); loop() } });
+      show(0); loop();
+
+      /* pause hero video when scrolled away (saves CPU, keeps page smooth) */
+      var hero = document.getElementById('hero');
+      new IntersectionObserver(function (e) {
+        heroVisible = e[0].isIntersecting;
+        var v = slides[cur].querySelector('video');
+        if (heroVisible) play(v); else v.pause();
+      }, { threshold: .05 }).observe(hero);
+
+      /* ---------- AI banner videos: load a little early, play only when visible ---------- */
+      var bv = [].slice.call(document.querySelectorAll('.ban video'));
+      var pre = new IntersectionObserver(function (e) {
+        e.forEach(function (x) { if (x.isIntersecting) { load(x.target); pre.unobserve(x.target) } });
+      }, { rootMargin: '600px 0px' });
+      var vis = new IntersectionObserver(function (e) {
+        e.forEach(function (x) { if (x.isIntersecting) play(x.target); else x.target.pause(); });
+      }, { threshold: .2 });
+      bv.forEach(function (v) { pre.observe(v); vis.observe(v) });
+
+      /* if the tab is hidden, pause everything */
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) document.querySelectorAll('video').forEach(function (v) { v.pause() });
+        else play(slides[cur].querySelector('video'));
+      });
+
+      /* ---------- scroll reveal ---------- */
+      var io = new IntersectionObserver(function (e) {
+        e.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target) } });
+      }, { threshold: .15 });
+      document.querySelectorAll('.rv').forEach(function (el) { io.observe(el) });
+
+      /* ---------- contact form -> WhatsApp ---------- */
+      document.getElementById('f').onsubmit = function (e) {
+        e.preventDefault(); var f = e.target;
+        var t = 'Hi Sivora, I am ' + f.name.value + '.\nPhone: ' + f.phone.value + '\nService: ' + f.type.value + '\n\n' + f.msg.value;
+        window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(t), '_blank');
+      };
+
+      /* ---------- chatbot (rule based, runs fully in the browser) ---------- */
+      var bot = document.getElementById('bot'), box = document.getElementById('msgs'), qr = document.getElementById('qr'),
+        btn = document.getElementById('botBtn'), inp = document.getElementById('bi'), greeted = false;
+      var wa = function (t) { return '<a target="_blank" rel="noopener" href="https://wa.me/' + WA + '?text=' + encodeURIComponent(t) + '">Chat on WhatsApp</a>' };
+      var KB = [
+        { k: ['software', 'website', 'web', 'app', 'crm', 'erp', 'pos', 'billing', 'development', 'mobile'], a: 'We build websites, CMS, CRM, ERP, POS and billing systems, mobile apps and APIs using Laravel, React, Node.js and Flutter. Tell us what you need and we will suggest the best approach.' },
+        { k: ['ai', 'chatbot', 'bot', 'automation', 'automate'], a: 'We add AI to your business with chatbots, smart search and workflow automation, either in a new product or an existing system.' },
+        { k: ['marketing', 'seo', 'social', 'instagram', 'facebook', 'ads', 'campaign'], a: 'Our digital marketing covers SEO, social media management and ad campaigns, planned by Rambabu and the team.' },
+        { k: ['video', 'edit', 'editing', 'reel', 'reels', 'shorts', 'youtube'], a: 'We edit reels, shorts, ads, product and brand videos, with auto captions, AI voiceover and background removal. We can also make AI-generated videos from a script.' },
+        { k: ['design', 'graphic', 'logo', 'poster', 'brand', 'branding', 'ui', 'ux', 'creative'], a: 'Graphic design from Sivora includes logos, brand kits, posters, social creatives, brochures and UI/UX design.' },
+        { k: ['price', 'cost', 'quote', 'charge', 'rate', 'budget', 'pricing'], a: 'Pricing depends on the scope of your project. Share a few details on WhatsApp and we will send you a quote.', w: 1 },
+        { k: ['time', 'long', 'deliver', 'days', 'timeline', 'duration'], a: 'Videos and designs usually take a few days. Software projects depend on size, and we share a timeline after understanding your needs.' },
+        { k: ['contact', 'call', 'phone', 'number', 'whatsapp', 'talk', 'reach'], a: 'You can reach us on WhatsApp or call +91 91217 66628.', w: 1 },
+        { k: ['team', 'who', 'founder', 'madhu', 'rambabu', 'rahul'], a: 'Madhu Mahesh is the founder and tech lead, Rambabu handles digital and social media, and Rahul does UI/UX, graphic design and AI video.' },
+        { k: ['hi', 'hello', 'hey', 'namaste', 'hii'], a: 'Hello! How can I help you today?' },
+        { k: ['thanks', 'thank', 'ok', 'okay'], a: 'You are welcome! Anything else I can help with?' }
+      ];
+      var CHIPS = ['Software', 'AI & chatbots', 'Video editing', 'Graphic design', 'Pricing', 'Talk to a human'];
+      function add(t, c, html) { var d = document.createElement('div'); d.className = 'msg ' + c; if (html) d.innerHTML = t; else d.textContent = t; box.appendChild(d); box.scrollTop = box.scrollHeight; return d }
+      function reply(q) {
+        var s = q.toLowerCase(), hit = null, words = s.replace(/[^a-z0-9 ]/g, ' ').split(/\s+/);
+        if (/human|agent|person|whatsapp/.test(s)) hit = KB[7];
+        else KB.forEach(function (r) { if (!hit && r.k.some(function (k) { return words.indexOf(k) > -1 || (k.length > 4 && s.indexOf(k) > -1) })) hit = r });
+        var ty = add('<span class="typing"><span></span><span></span><span></span></span>', 'b', 1);
+        setTimeout(function () {
+          ty.remove();
+          if (hit) add(hit.a + (hit.w ? '<br>' + wa('Hi Sivora, I want a quote') : ''), 'b', 1);
+          else add('I am not sure about that one. Our team can answer it directly.<br>' + wa(q), 'b', 1);
+        }, 700);
+      }
+      function ask(q) { if (!q.trim()) return; add(q, 'u'); reply(q) }
+      CHIPS.forEach(function (c) { var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.onclick = function () { ask(c) }; qr.appendChild(b) });
+      function toggle(o) {
+        bot.classList.toggle('open', o); btn.setAttribute('aria-expanded', o);
+        if (o && !greeted) { greeted = true; setTimeout(function () { add('Hi, I am the Sivora assistant. Ask me about our services, or pick a topic below.', 'b') }, 250) }
+        if (o) setTimeout(function () { inp.focus() }, 300);
+      }
+      btn.onclick = function () { toggle(!bot.classList.contains('open')) };
+      document.getElementById('botX').onclick = function () { toggle(false) };
+      document.getElementById('bf').onsubmit = function (e) { e.preventDefault(); ask(inp.value); inp.value = '' };
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false) });
+    })();
+  </script>
+</body>
+
+</html>
