@@ -23,7 +23,7 @@
       --ink: #071B3A;
       --mut: #566581;
       --line: #dfe6ee;
-      --wa: #25D366;
+      --wa: #25D366
     }
 
     @media(prefers-color-scheme:dark) {
@@ -190,6 +190,112 @@
       background: rgba(255, 255, 255, .12)
     }
 
+    /* ---------- nav dropdown ---------- */
+    .nav-dropdown {
+      position: relative;
+      padding-bottom: 14px;
+      margin-bottom: -14px
+    }
+
+    .dropdown-toggle span {
+      display: inline-block;
+      font-size: .8em;
+      transition: transform .2s
+    }
+
+    .nav-dropdown:hover .dropdown-toggle span,
+    .nav-dropdown.open .dropdown-toggle span {
+      transform: rotate(180deg)
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: -16px;
+      min-width: 240px;
+      padding: 10px;
+      background: var(--bg);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .28);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: .22s
+    }
+
+    .nav-dropdown:hover>.dropdown-menu,
+    .nav-dropdown:focus-within>.dropdown-menu,
+    .nav-dropdown.open>.dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: none
+    }
+
+    nav .dropdown-menu a,
+    nav .submenu a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: .93rem;
+      color: var(--ink);
+      text-shadow: none;
+      transition: background .2s, color .2s
+    }
+
+    nav .dropdown-menu a:after,
+    nav .submenu a:after {
+      display: none
+    }
+
+    nav .dropdown-menu a:hover,
+    nav .submenu a:hover {
+      background: var(--alt);
+      color: var(--blue)
+    }
+
+    .has-sub {
+      position: relative
+    }
+
+    .submenu {
+      position: absolute;
+      top: -10px;
+      left: 100%;
+      min-width: 210px;
+      padding: 10px;
+      margin-left: 6px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .28);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-8px);
+      transition: .22s
+    }
+
+    .has-sub:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: -10px;
+      width: 12px
+    }
+
+    .has-sub:hover>.submenu,
+    .has-sub:focus-within>.submenu,
+    .has-sub.open>.submenu {
+      opacity: 1;
+      visibility: visible;
+      transform: none
+    }
+
     /* ---------- video banners (hero + AI) ---------- */
     .hero {
       position: relative;
@@ -266,7 +372,6 @@
       margin: 0 0 28px
     }
 
-    /* hero text enters when slide becomes active */
     .slide .tag,
     .slide h1,
     .slide p,
@@ -1115,7 +1220,9 @@
     }
 
     @media(max-width:860px) {
-      nav a:not(.btn) {
+
+      nav>a:not(.btn),
+      .nav-dropdown {
         display: none
       }
 
@@ -1200,9 +1307,39 @@
     <a href="#top" class="logo" aria-label="Sivora home"><img src="img/logo.webp" alt="Sivora – Build Innovate Grow"
         width="700" height="212"></a>
     <nav>
-      <a href="#services">Services</a>
-      <a href="#ai">AI Video</a>
-      <a href="#team">Team</a>
+      <a href="#services">Career Guidance</a>
+
+      <div class="nav-dropdown">
+        <a href="#services" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Services</a>
+        <div class="dropdown-menu">
+          <a href="#software">Software Development</a>
+          <a href="#ai-automation">AI &amp; Automation</a>
+        
+
+          <div class="has-sub">
+            <a href="#marketing">Digital Marketing <span>›</span></a>
+            <div class="submenu">
+              <a href="#seo">SEO</a>
+              <a href="#social-media">Social Media Management</a>
+              <a href="#ads-campaigns">Ads &amp; Campaigns</a>
+            </div>
+          </div>
+
+          <div class="has-sub">
+            <a href="#video-editing">Video Editing <span>›</span></a>
+            <div class="submenu">
+              <a href="#instagram-reels">Instagram Reels</a>
+              <a href="#cinematic-videos">Cinematic Videos</a>
+              <a href="#ai-videos">AI Videos</a>
+              <a href="#branding-videos">Branding Videos</a>
+            </div>
+          </div>
+
+          <a href="#graphic-design">Graphic Design</a>
+        </div>
+      </div>
+
+      <a href="#team">Products</a>
       <a href="#contact" class="btn p">Start a Project</a>
     </nav>
   </header>
@@ -1231,8 +1368,8 @@
           <h1>Content that stops the scroll and sells.</h1>
           <p>Reels, ads, product videos, posters, social creatives and brand identity, edited and designed by people
             who care about the details.</p>
-          <div class="acts"><a href="#contact" class="btn p">Create Content</a><a href="#ai"
-              class="btn g">See Video Work</a></div>
+          <div class="acts"><a href="#contact" class="btn p">Create Content</a><a href="#ai" class="btn g">See Video
+              Work</a></div>
         </div>
       </div>
 
@@ -1244,8 +1381,8 @@
           <h1>Smarter software. Faster decisions. Bigger possibilities.</h1>
           <p>AI-integrated applications, chatbots, intelligent automation and analytics dashboards built for the
             future.</p>
-          <div class="acts"><a href="#contact" class="btn p">Build With AI</a><a href="#services"
-              class="btn g">Discover AI Solutions</a></div>
+          <div class="acts"><a href="#contact" class="btn p">Build With AI</a><a href="#services" class="btn g">Discover
+              AI Solutions</a></div>
         </div>
       </div>
 
@@ -1263,7 +1400,7 @@
         <div class="eb">What we do</div>
         <h2 class="rv">Everything your brand needs, done well.</h2>
 
-        <div class="row rv"><b>01</b>
+        <div class="row rv" id="software"><b>01</b>
           <h3>Software Development</h3>
           <div>
             <p>Websites, CMS, CRM, ERP, POS and billing, mobile apps and APIs, built in the technology that fits your
@@ -1276,7 +1413,7 @@
             </ul>
           </div>
         </div>
-        <div class="row rv"><b>02</b>
+        <div class="row rv" id="ai-automation"><b>02</b>
           <h3>AI &amp; Automation</h3>
           <div>
             <p>Chatbots, smart search and workflow automation added to new or existing systems.</p>
@@ -1287,7 +1424,7 @@
             </ul>
           </div>
         </div>
-        <div class="row rv"><b>03</b>
+        <div class="row rv" id="marketing"><b>03</b>
           <h3>Digital Marketing</h3>
           <div>
             <p>SEO, social media management and campaigns that bring the right customers to your business.</p>
@@ -1298,7 +1435,7 @@
             </ul>
           </div>
         </div>
-        <div class="row rv"><b>04</b>
+        <div class="row rv" id="video-editing"><b>04</b>
           <h3>Video Editing</h3>
           <div>
             <p>Reels, shorts, ads, product and brand videos, plus AI video generation when you need speed.</p>
@@ -1310,7 +1447,7 @@
             </ul>
           </div>
         </div>
-        <div class="row rv"><b>05</b>
+        <div class="row rv" id="graphic-design"><b>05</b>
           <h3>Graphic Design</h3>
           <div>
             <p>Logos, brand kits, posters, social media creatives, brochures and UI/UX design that look consistent
@@ -1328,7 +1465,7 @@
 
     <!-- ================= AI VIDEO EDITING (3 banner sections) ================= -->
     <div id="ai">
-      <div class="aihead">
+      <div class="aihead" id="cinematic-videos">
         <div class="wrap">
           <div class="tag">AI Video Editing</div>
           <h2 class="rv">Edit at the speed of ideas.</h2>
@@ -1337,7 +1474,7 @@
         </div>
       </div>
 
-      <section class="ban" style="padding:80px 0">
+      <section class="ban" id="ai-videos" style="padding:80px 0">
         <video class="bg" muted loop playsinline preload="none" poster="videos/ai-video.jpg"
           data-src="videos/ai-video.mp4"></video>
         <div class="wrap">
@@ -1358,7 +1495,7 @@
         <div class="num" aria-hidden="true">01</div>
       </section>
 
-      <section class="ban r" style="padding:80px 0">
+      <section class="ban r" id="instagram-reels" style="padding:80px 0">
         <video class="bg" muted loop playsinline preload="none" poster="videos/marketing-video-editing.jpg"
           data-src="videos/marketing-video-editing.mp4"></video>
         <div class="wrap">
@@ -1385,7 +1522,7 @@
         <div class="num" aria-hidden="true">02</div>
       </section>
 
-      <section class="ban" style="padding:80px 0">
+      <section class="ban" id="branding-videos" style="padding:80px 0">
         <video class="bg" muted loop playsinline preload="none" poster="videos/ai-video-2.jpg"
           data-src="videos/ai-video-2.mp4"></video>
         <div class="wrap">
@@ -1423,7 +1560,8 @@
               <li>Support</li>
               <li>Strategy</li>
             </ul>
-            <a class="wl" href="https://wa.me/919121766628?text=Hi%20Madhu%2C%20I%20want%20to%20talk%20about%20a%20project"
+            <a class="wl"
+              href="https://wa.me/919121766628?text=Hi%20Madhu%2C%20I%20want%20to%20talk%20about%20a%20project"
               target="_blank" rel="noopener">Message on WhatsApp</a>
           </article>
           <article class="m rv d1">
@@ -1436,7 +1574,8 @@
               <li>Social media</li>
               <li>Campaigns</li>
             </ul>
-            <a class="wl" href="https://wa.me/919121766628?text=Hi%20Rambabu%2C%20I%20need%20help%20with%20digital%20marketing"
+            <a class="wl"
+              href="https://wa.me/919121766628?text=Hi%20Rambabu%2C%20I%20need%20help%20with%20digital%20marketing"
               target="_blank" rel="noopener">Message on WhatsApp</a>
           </article>
           <article class="m rv d2">
@@ -1471,13 +1610,11 @@
             <option>Video Editing</option>
             <option>Graphic Design</option>
           </select>
-          <textarea name="msg" rows="4" placeholder="Tell us about your project" aria-label="Project description"></textarea>
+          <textarea name="msg" rows="4" placeholder="Tell us about your project"
+            aria-label="Project description"></textarea>
           <button class="btn p full" type="submit">Send on WhatsApp</button>
         </form>
-        <div class="ct">
-          <a class="w" href="https://wa.me/919121766628" target="_blank" rel="noopener">WhatsApp +91 91217 66628</a>
-          <a href="tel:+919121766628">Call +91 91217 66628</a>
-        </div>
+
       </div>
     </section>
   </main>
@@ -1494,7 +1631,8 @@
         <path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" />
       </svg>
     </button>
-    <a class="wa" href="https://wa.me/919121766628?text=Hi%20Sivora%2C%20I%20want%20to%20know%20more%20about%20your%20services"
+    <a class="wa"
+      href="https://wa.me/919121766628?text=Hi%20Sivora%2C%20I%20want%20to%20know%20more%20about%20your%20services"
       target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
       <svg viewBox="0 0 32 32" aria-hidden="true">
         <path
@@ -1522,15 +1660,14 @@
 
       /* ---------- header shrink on scroll ---------- */
       var hd = document.getElementById('hd');
-      function sc() { hd.classList.toggle('sc', window.scrollY > 40) }
-      window.addEventListener('scroll', sc, { passive: true }); sc();
+      function sc() {hd.classList.toggle('sc', window.scrollY > 40)}
+      window.addEventListener('scroll', sc, {passive: true}); sc();
 
-      /* ---------- video loading: smooth playback ----------
-         Each video gets its src once, buffers ahead, and only plays while visible. */
+      /* ---------- video loading ---------- */
       function load(v) {
-        if (!v.getAttribute('src') && v.dataset.src) { v.src = v.dataset.src; v.load(); }
+        if (!v.getAttribute('src') && v.dataset.src) {v.src = v.dataset.src; v.load();}
       }
-      function play(v) { load(v); var p = v.play(); if (p && p.catch) p.catch(function () { }); }
+      function play(v) {load(v); var p = v.play(); if (p && p.catch) p.catch(function () { });}
 
       /* ---------- hero slider ---------- */
       var slides = [].slice.call(document.querySelectorAll('.slide'));
@@ -1542,48 +1679,45 @@
         slides.forEach(function (s, k) {
           var v = s.querySelector('video');
           s.classList.toggle('on', k === n);
-          if (k === n) { if (heroVisible) play(v); }
-          else if (v) { setTimeout(function () { if (!s.classList.contains('on')) v.pause(); }, 950); }
+          if (k === n) {if (heroVisible) play(v);}
+          else if (v) {setTimeout(function () {if (!s.classList.contains('on')) v.pause();}, 950);}
         });
         dots.forEach(function (b, k) {
           b.classList.remove('on'); void b.offsetWidth; b.classList.toggle('on', k === n);
         });
-        /* warm up the next video so the cross-fade never waits */
         var nx = slides[(n + 1) % slides.length].querySelector('video'); load(nx);
       }
-      function loop() { clearInterval(timer); timer = setInterval(function () { if (heroVisible) show((cur + 1) % slides.length) }, 8000); }
-      dots.forEach(function (b, k) { b.onclick = function () { show(k); loop() } });
+      function loop() {clearInterval(timer); timer = setInterval(function () {if (heroVisible) show((cur + 1) % slides.length)}, 8000);}
+      dots.forEach(function (b, k) {b.onclick = function () {show(k); loop()}});
       show(0); loop();
 
-      /* pause hero video when scrolled away (saves CPU, keeps page smooth) */
       var hero = document.getElementById('hero');
       new IntersectionObserver(function (e) {
         heroVisible = e[0].isIntersecting;
         var v = slides[cur].querySelector('video');
         if (heroVisible) play(v); else v.pause();
-      }, { threshold: .05 }).observe(hero);
+      }, {threshold: .05}).observe(hero);
 
-      /* ---------- AI banner videos: load a little early, play only when visible ---------- */
+      /* ---------- AI banner videos ---------- */
       var bv = [].slice.call(document.querySelectorAll('.ban video'));
       var pre = new IntersectionObserver(function (e) {
-        e.forEach(function (x) { if (x.isIntersecting) { load(x.target); pre.unobserve(x.target) } });
-      }, { rootMargin: '600px 0px' });
+        e.forEach(function (x) {if (x.isIntersecting) {load(x.target); pre.unobserve(x.target)} });
+      }, {rootMargin: '600px 0px'});
       var vis = new IntersectionObserver(function (e) {
-        e.forEach(function (x) { if (x.isIntersecting) play(x.target); else x.target.pause(); });
-      }, { threshold: .2 });
-      bv.forEach(function (v) { pre.observe(v); vis.observe(v) });
+        e.forEach(function (x) {if (x.isIntersecting) play(x.target); else x.target.pause();});
+      }, {threshold: .2});
+      bv.forEach(function (v) {pre.observe(v); vis.observe(v)});
 
-      /* if the tab is hidden, pause everything */
       document.addEventListener('visibilitychange', function () {
-        if (document.hidden) document.querySelectorAll('video').forEach(function (v) { v.pause() });
+        if (document.hidden) document.querySelectorAll('video').forEach(function (v) {v.pause()});
         else play(slides[cur].querySelector('video'));
       });
 
       /* ---------- scroll reveal ---------- */
       var io = new IntersectionObserver(function (e) {
-        e.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target) } });
-      }, { threshold: .15 });
-      document.querySelectorAll('.rv').forEach(function (el) { io.observe(el) });
+        e.forEach(function (x) {if (x.isIntersecting) {x.target.classList.add('in'); io.unobserve(x.target)} });
+      }, {threshold: .15});
+      document.querySelectorAll('.rv').forEach(function (el) {io.observe(el)});
 
       /* ---------- contact form -> WhatsApp ---------- */
       document.getElementById('f').onsubmit = function (e) {
@@ -1595,26 +1729,26 @@
       /* ---------- chatbot (rule based, runs fully in the browser) ---------- */
       var bot = document.getElementById('bot'), box = document.getElementById('msgs'), qr = document.getElementById('qr'),
         btn = document.getElementById('botBtn'), inp = document.getElementById('bi'), greeted = false;
-      var wa = function (t) { return '<a target="_blank" rel="noopener" href="https://wa.me/' + WA + '?text=' + encodeURIComponent(t) + '">Chat on WhatsApp</a>' };
+      var wa = function (t) {return '<a target="_blank" rel="noopener" href="https://wa.me/' + WA + '?text=' + encodeURIComponent(t) + '">Chat on WhatsApp</a>'};
       var KB = [
-        { k: ['software', 'website', 'web', 'app', 'crm', 'erp', 'pos', 'billing', 'development', 'mobile'], a: 'We build websites, CMS, CRM, ERP, POS and billing systems, mobile apps and APIs using Laravel, React, Node.js and Flutter. Tell us what you need and we will suggest the best approach.' },
-        { k: ['ai', 'chatbot', 'bot', 'automation', 'automate'], a: 'We add AI to your business with chatbots, smart search and workflow automation, either in a new product or an existing system.' },
-        { k: ['marketing', 'seo', 'social', 'instagram', 'facebook', 'ads', 'campaign'], a: 'Our digital marketing covers SEO, social media management and ad campaigns, planned by Rambabu and the team.' },
-        { k: ['video', 'edit', 'editing', 'reel', 'reels', 'shorts', 'youtube'], a: 'We edit reels, shorts, ads, product and brand videos, with auto captions, AI voiceover and background removal. We can also make AI-generated videos from a script.' },
-        { k: ['design', 'graphic', 'logo', 'poster', 'brand', 'branding', 'ui', 'ux', 'creative'], a: 'Graphic design from Sivora includes logos, brand kits, posters, social creatives, brochures and UI/UX design.' },
-        { k: ['price', 'cost', 'quote', 'charge', 'rate', 'budget', 'pricing'], a: 'Pricing depends on the scope of your project. Share a few details on WhatsApp and we will send you a quote.', w: 1 },
-        { k: ['time', 'long', 'deliver', 'days', 'timeline', 'duration'], a: 'Videos and designs usually take a few days. Software projects depend on size, and we share a timeline after understanding your needs.' },
-        { k: ['contact', 'call', 'phone', 'number', 'whatsapp', 'talk', 'reach'], a: 'You can reach us on WhatsApp or call +91 91217 66628.', w: 1 },
-        { k: ['team', 'who', 'founder', 'madhu', 'rambabu', 'rahul'], a: 'Madhu Mahesh is the founder and tech lead, Rambabu handles digital and social media, and Rahul does UI/UX, graphic design and AI video.' },
-        { k: ['hi', 'hello', 'hey', 'namaste', 'hii'], a: 'Hello! How can I help you today?' },
-        { k: ['thanks', 'thank', 'ok', 'okay'], a: 'You are welcome! Anything else I can help with?' }
+        {k: ['software', 'website', 'web', 'app', 'crm', 'erp', 'pos', 'billing', 'development', 'mobile'], a: 'We build websites, CMS, CRM, ERP, POS and billing systems, mobile apps and APIs using Laravel, React, Node.js and Flutter. Tell us what you need and we will suggest the best approach.'},
+        {k: ['ai', 'chatbot', 'bot', 'automation', 'automate'], a: 'We add AI to your business with chatbots, smart search and workflow automation, either in a new product or an existing system.'},
+        {k: ['marketing', 'seo', 'social', 'instagram', 'facebook', 'ads', 'campaign'], a: 'Our digital marketing covers SEO, social media management and ad campaigns, planned by Rambabu and the team.'},
+        {k: ['video', 'edit', 'editing', 'reel', 'reels', 'shorts', 'youtube'], a: 'We edit reels, shorts, ads, product and brand videos, with auto captions, AI voiceover and background removal. We can also make AI-generated videos from a script.'},
+        {k: ['design', 'graphic', 'logo', 'poster', 'brand', 'branding', 'ui', 'ux', 'creative'], a: 'Graphic design from Sivora includes logos, brand kits, posters, social creatives, brochures and UI/UX design.'},
+        {k: ['price', 'cost', 'quote', 'charge', 'rate', 'budget', 'pricing'], a: 'Pricing depends on the scope of your project. Share a few details on WhatsApp and we will send you a quote.', w: 1},
+        {k: ['time', 'long', 'deliver', 'days', 'timeline', 'duration'], a: 'Videos and designs usually take a few days. Software projects depend on size, and we share a timeline after understanding your needs.'},
+        {k: ['contact', 'call', 'phone', 'number', 'whatsapp', 'talk', 'reach'], a: 'You can reach us on WhatsApp or call +91 91217 66628.', w: 1},
+        {k: ['team', 'who', 'founder', 'madhu', 'rambabu', 'rahul'], a: 'Madhu Mahesh is the founder and tech lead, Rambabu handles digital and social media, and Rahul does UI/UX, graphic design and AI video.'},
+        {k: ['hi', 'hello', 'hey', 'namaste', 'hii'], a: 'Hello! How can I help you today?'},
+        {k: ['thanks', 'thank', 'ok', 'okay'], a: 'You are welcome! Anything else I can help with?'}
       ];
       var CHIPS = ['Software', 'AI & chatbots', 'Video editing', 'Graphic design', 'Pricing', 'Talk to a human'];
-      function add(t, c, html) { var d = document.createElement('div'); d.className = 'msg ' + c; if (html) d.innerHTML = t; else d.textContent = t; box.appendChild(d); box.scrollTop = box.scrollHeight; return d }
+      function add(t, c, html) {var d = document.createElement('div'); d.className = 'msg ' + c; if (html) d.innerHTML = t; else d.textContent = t; box.appendChild(d); box.scrollTop = box.scrollHeight; return d}
       function reply(q) {
         var s = q.toLowerCase(), hit = null, words = s.replace(/[^a-z0-9 ]/g, ' ').split(/\s+/);
         if (/human|agent|person|whatsapp/.test(s)) hit = KB[7];
-        else KB.forEach(function (r) { if (!hit && r.k.some(function (k) { return words.indexOf(k) > -1 || (k.length > 4 && s.indexOf(k) > -1) })) hit = r });
+        else KB.forEach(function (r) {if (!hit && r.k.some(function (k) {return words.indexOf(k) > -1 || (k.length > 4 && s.indexOf(k) > -1)})) hit = r});
         var ty = add('<span class="typing"><span></span><span></span><span></span></span>', 'b', 1);
         setTimeout(function () {
           ty.remove();
@@ -1622,17 +1756,38 @@
           else add('I am not sure about that one. Our team can answer it directly.<br>' + wa(q), 'b', 1);
         }, 700);
       }
-      function ask(q) { if (!q.trim()) return; add(q, 'u'); reply(q) }
-      CHIPS.forEach(function (c) { var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.onclick = function () { ask(c) }; qr.appendChild(b) });
+      function ask(q) {if (!q.trim()) return; add(q, 'u'); reply(q)}
+      CHIPS.forEach(function (c) {var b = document.createElement('button'); b.type = 'button'; b.textContent = c; b.onclick = function () {ask(c)}; qr.appendChild(b)});
       function toggle(o) {
         bot.classList.toggle('open', o); btn.setAttribute('aria-expanded', o);
-        if (o && !greeted) { greeted = true; setTimeout(function () { add('Hi, I am the Sivora assistant. Ask me about our services, or pick a topic below.', 'b') }, 250) }
-        if (o) setTimeout(function () { inp.focus() }, 300);
+        if (o && !greeted) {greeted = true; setTimeout(function () {add('Hi, I am the Sivora assistant. Ask me about our services, or pick a topic below.', 'b')}, 250)}
+        if (o) setTimeout(function () {inp.focus()}, 300);
       }
-      btn.onclick = function () { toggle(!bot.classList.contains('open')) };
-      document.getElementById('botX').onclick = function () { toggle(false) };
-      document.getElementById('bf').onsubmit = function (e) { e.preventDefault(); ask(inp.value); inp.value = '' };
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') toggle(false) });
+      btn.onclick = function () {toggle(!bot.classList.contains('open'))};
+      document.getElementById('botX').onclick = function () {toggle(false)};
+      document.getElementById('bf').onsubmit = function (e) {e.preventDefault(); ask(inp.value); inp.value = ''};
+      document.addEventListener('keydown', function (e) {if (e.key === 'Escape') toggle(false)});
+
+      /* ---------- nav dropdown: click/tap support ---------- */
+      var dd = document.querySelector('.nav-dropdown');
+      var toggleBtn = dd.querySelector('.dropdown-toggle');
+      var touch = function () {return window.matchMedia('(hover:none)').matches};
+      toggleBtn.addEventListener('click', function (e) {
+        if (touch()) {
+          e.preventDefault();
+          var o = dd.classList.toggle('open');
+          toggleBtn.setAttribute('aria-expanded', o);
+        }
+      });
+      dd.querySelector('.has-sub > a').addEventListener('click', function (e) {
+        if (touch() && !this.parentNode.classList.contains('open')) {
+          e.preventDefault(); this.parentNode.classList.add('open');
+        }
+      });
+      dd.querySelectorAll('.dropdown-menu a, .submenu a').forEach(function (a) {
+        a.addEventListener('click', function () {dd.classList.remove('open')});
+      });
+      document.addEventListener('click', function (e) {if (!dd.contains(e.target)) dd.classList.remove('open')});
     })();
   </script>
 </body>
