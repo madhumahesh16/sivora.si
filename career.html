@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Interview Lab – Career Guidance & Mock Interviews | Sivora</title>
+  <meta name="description"
+    content="Practise real mock interviews, get scored feedback and a clear career roadmap with Sivora's Interview Lab.">
+  <link rel="icon" href="img/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #071B3A;
+      --deep: #040f22;
+      --blue: #087FE8;
+      --cyan: #00C9C8;
+      --teal: #16D5B5;
+      --ink: #eef3fa;
+      --mut: #9fb0c8;
+      --line: rgba(255, 255, 255, .12);
+      --wa: #25D366
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px
+    }
+
+    body {
+      margin: 0;
+      font-family: Manrope, system-ui, Arial, sans-serif;
+      background: var(--deep);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--teal);
+      outline-offset: 3px
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px;
+      position: relative
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: calc(14px + env(safe-area-inset-top, 0px)) 22px 14px;
+      color: #fff;
+      transition: background .3s, padding .3s
+    }
+
+    header:before {
+      content: "";
+      position: absolute;
+      inset: 0 0 -40px;
+      background: linear-gradient(rgba(7, 27, 58, .85), transparent);
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity .3s
+    }
+
+    header.sc {
+      background: rgba(7, 27, 58, .96);
+      padding-top: calc(8px + env(safe-area-inset-top, 0px));
+      padding-bottom: 8px
+    }
+
+    header.sc:before {
+      opacity: 0
+    }
+
+    .logo {
+      display: block;
+      background: #fff;
+      border-radius: 16px;
+      padding: 8px 20px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .3);
+      transition: transform .25s
+    }
+
+    .logo:hover {
+      transform: scale(1.04)
+    }
+
+    .logo img {
+      height: 58px;
+      width: auto;
+      display: block
+    }
+
+    header.sc .logo img {
+      height: 48px
+    }
+
+    nav {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      font-weight: 600;
+      font-size: .98rem
+    }
+
+    nav a:not(.btn) {
+      text-shadow: 0 1px 8px rgba(0, 0, 0, .5);
+      position: relative
+    }
+
+    nav a:not(.btn):after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      height: 2px;
+      width: 0;
+      background: var(--teal);
+      transition: width .25s
+    }
+
+    nav a:not(.btn):hover:after {
+      width: 100%
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 26px;
+      border-radius: 99px;
+      font: inherit;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+      color: #fff;
+      transition: transform .2s, box-shadow .2s
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0, 201, 200, .35)
+    }
+
+    .p {
+      background: linear-gradient(90deg, var(--blue), var(--cyan))
+    }
+
+    .g {
+      border: 1.5px solid rgba(255, 255, 255, .45);
+      margin-left: 8px
+    }
+
+    .tag {
+      color: var(--teal);
+      font-weight: 800;
+      letter-spacing: .14em;
+      font-size: .8rem;
+      text-transform: uppercase
+    }
+
+    /* ---------- nav dropdown ---------- */
+    .nav-dropdown {
+      position: relative;
+      padding-bottom: 14px;
+      margin-bottom: -14px
+    }
+
+    .dropdown-toggle span {
+      display: inline-block;
+      font-size: .8em;
+      transition: transform .2s
+    }
+
+    .nav-dropdown:hover .dropdown-toggle span,
+    .nav-dropdown.open .dropdown-toggle span {
+      transform: rotate(180deg)
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: -16px;
+      min-width: 240px;
+      padding: 10px;
+      background: #071B3A;
+      color: #eef3fa;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .28);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: .22s
+    }
+
+    .nav-dropdown:hover>.dropdown-menu,
+    .nav-dropdown:focus-within>.dropdown-menu,
+    .nav-dropdown.open>.dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: none
+    }
+
+    nav .dropdown-menu a,
+    nav .submenu a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: .93rem;
+      color: #eef3fa;
+      text-shadow: none;
+      transition: background .2s, color .2s
+    }
+
+    nav .dropdown-menu a:after,
+    nav .submenu a:after {
+      display: none
+    }
+
+    nav .dropdown-menu a:hover,
+    nav .submenu a:hover {
+      background: rgba(255, 255, 255, .08);
+      color: var(--blue)
+    }
+
+    .has-sub {
+      position: relative
+    }
+
+    .submenu {
+      position: absolute;
+      top: -10px;
+      left: 100%;
+      min-width: 210px;
+      padding: 10px;
+      margin-left: 6px;
+      background: #071B3A;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .28);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-8px);
+      transition: .22s
+    }
+
+    .has-sub:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: -10px;
+      width: 12px
+    }
+
+    .has-sub:hover>.submenu,
+    .has-sub:focus-within>.submenu,
+    .has-sub.open>.submenu {
+      opacity: 1;
+      visibility: visible;
+      transform: none
+    }
+
+
+    /* hero */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 70px;
+      overflow: hidden
+    }
+
+    .grid {
+      position: absolute;
+      inset: -50% -10%;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 56px 56px;
+      transform: perspective(600px) rotateX(58deg);
+      mask-image: linear-gradient(transparent 5%, #000 50%, transparent 95%);
+      animation: drift 6s linear infinite
+    }
+
+    @keyframes drift {
+      to {
+        background-position: 0 56px
+      }
+    }
+
+    .glow {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      left: 0;
+      top: 0;
+      background: radial-gradient(circle, rgba(0, 201, 200, .28), transparent 65%);
+      pointer-events: none;
+      transform: translate(var(--x, 60vw), var(--y, 20vh)) translate(-50%, -50%);
+      transition: transform .25s ease-out
+    }
+
+    .hg {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 44px;
+      align-items: center
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: 1.04;
+      margin: .35em 0;
+      font-weight: 800
+    }
+
+    h1 .w {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(40px) rotate(4deg);
+      animation: up .8s cubic-bezier(.2, .7, .2, 1) forwards
+    }
+
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent
+    }
+
+    @keyframes up {
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .lead {
+      color: #c4d4ea;
+      max-width: 46ch;
+      font-size: 1.08rem;
+      margin: 0 0 28px
+    }
+
+    .sim {
+      background: rgba(10, 26, 51, .8);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, .5);
+      overflow: hidden;
+      animation: float 6s ease-in-out infinite
+    }
+
+    @keyframes float {
+      50% {
+        transform: translateY(-10px)
+      }
+    }
+
+    .sh {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--mut)
+    }
+
+    .sh i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff5f57
+    }
+
+    .sh i:nth-child(2) {
+      background: #febc2e
+    }
+
+    .sh i:nth-child(3) {
+      background: #28c840
+    }
+
+    .sh span {
+      margin-left: auto;
+      color: var(--teal)
+    }
+
+    .sh span:before {
+      content: "● ";
+      animation: bl 1.2s infinite
+    }
+
+    @keyframes bl {
+      50% {
+        opacity: .2
+      }
+    }
+
+    .chat {
+      height: 230px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden
+    }
+
+    .bub {
+      max-width: 88%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: .9rem;
+      line-height: 1.45;
+      animation: pop .35s
+    }
+
+    .bub.q {
+      background: rgba(255, 255, 255, .08);
+      border-bottom-left-radius: 4px
+    }
+
+    .bub.a {
+      background: var(--blue);
+      align-self: flex-end;
+      border-bottom-right-radius: 4px
+    }
+
+    @keyframes pop {
+      from {
+        opacity: 0;
+        transform: translateY(8px)
+      }
+    }
+
+    .sc3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 14px 16px 18px;
+      border-top: 1px solid var(--line)
+    }
+
+    .sc3 div {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--mut)
+    }
+
+    .sc3 b {
+      color: var(--ink);
+      float: right
+    }
+
+    .bar {
+      height: 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, .1);
+      margin-top: 6px;
+      overflow: hidden
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      transition: width 1.2s cubic-bezier(.2, .7, .2, 1)
+    }
+
+    /* marquee */
+    .mq {
+      border-block: 1px solid var(--line);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 18px 0;
+      background: var(--navy)
+    }
+
+    .mq div {
+      display: inline-block;
+      animation: mq 28s linear infinite;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, .4)
+    }
+
+    .mq span {
+      margin: 0 22px
+    }
+
+    .mq span:nth-child(3n) {
+      color: var(--teal);
+      -webkit-text-stroke: 0
+    }
+
+    @keyframes mq {
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    section {
+      padding: 100px 0
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+      line-height: 1.1;
+      margin: .3em 0 .9em;
+      font-weight: 800;
+      max-width: 18ch
+    }
+
+    /* journey */
+    .jr {
+      position: relative;
+      padding: 10px 0
+    }
+
+    .jl {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      margin-left: -1.5px;
+      background: var(--line);
+      border-radius: 3px
+    }
+
+    .jl:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: calc(var(--p, 0) * 100%);
+      background: linear-gradient(var(--blue), var(--teal));
+      box-shadow: 0 0 18px var(--teal);
+      border-radius: 3px
+    }
+
+    .st {
+      position: relative;
+      width: 50%;
+      padding: 0 46px 64px 0;
+      text-align: right;
+      opacity: .25;
+      transform: translateX(-30px);
+      transition: .7s
+    }
+
+    .st:nth-child(odd) {
+      margin-left: 50%;
+      padding: 0 0 64px 46px;
+      text-align: left;
+      transform: translateX(30px)
+    }
+
+    .st.on {
+      opacity: 1;
+      transform: none
+    }
+
+    .st:before {
+      content: "";
+      position: absolute;
+      right: -11px;
+      top: 6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--deep);
+      border: 3px solid var(--line);
+      transition: .5s
+    }
+
+    .st:nth-child(odd):before {
+      right: auto;
+      left: -11px
+    }
+
+    .st.on:before {
+      border-color: var(--teal);
+      background: var(--teal);
+      box-shadow: 0 0 0 8px rgba(22, 213, 181, .18)
+    }
+
+    .st small {
+      color: var(--teal);
+      font-weight: 800;
+      letter-spacing: .12em
+    }
+
+    .st h3 {
+      margin: 2px 0 6px;
+      font-size: 1.5rem
+    }
+
+    .st p {
+      margin: 0;
+      color: var(--mut);
+      max-width: 36ch;
+      display: inline-block
+    }
+
+    /* offer panels */
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      perspective: 900px
+    }
+
+    .pn {
+      position: relative;
+      min-height: 380px;
+      padding: 38px 32px;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: linear-gradient(160deg, #0b2347, #061327);
+      overflow: hidden;
+      transform: rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
+      transition: transform .2s, border-color .3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end
+    }
+
+    .pn:hover {
+      border-color: var(--teal)
+    }
+
+    .pn:before {
+      content: attr(data-n);
+      position: absolute;
+      top: -10px;
+      right: 18px;
+      font-size: 11rem;
+      font-weight: 800;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(255, 255, 255, .12)
+    }
+
+    .pn h3 {
+      font-size: 2rem;
+      margin: 0 0 8px
+    }
+
+    .pn p {
+      color: var(--mut);
+      margin: 0 0 18px
+    }
+
+    .pn ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .pn li {
+      padding: 6px 14px;
+      font-size: .84rem;
+      font-weight: 600;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      transition: .2s
+    }
+
+    .pn li:hover {
+      background: var(--teal);
+      color: var(--navy);
+      border-color: var(--teal)
+    }
+
+    /* scorecard */
+    .rings {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      text-align: center
+    }
+
+    .ring {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 10px
+    }
+
+    .ring svg {
+      transform: rotate(-90deg)
+    }
+
+    .ring circle {
+      fill: none;
+      stroke-width: 9;
+      stroke-linecap: round
+    }
+
+    .ring .t {
+      stroke: var(--line)
+    }
+
+    .ring .v {
+      stroke: var(--teal);
+      stroke-dasharray: 327;
+      stroke-dashoffset: 327;
+      transition: stroke-dashoffset 1.6s cubic-bezier(.2, .7, .2, 1)
+    }
+
+    .ring b {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 1.9rem
+    }
+
+    .rings span {
+      font-weight: 700;
+      color: var(--mut)
+    }
+
+    .note {
+      color: var(--mut);
+      font-size: .85rem;
+      margin-top: 26px
+    }
+
+    /* contact */
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 760px
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .05);
+      color: var(--ink);
+      font: inherit
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 0;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(22, 213, 181, .15)
+    }
+
+    textarea,
+    .full {
+      grid-column: 1/-1
+    }
+
+    .pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .pills label {
+      cursor: pointer
+    }
+
+    .pills input {
+      position: absolute;
+      opacity: 0;
+      width: 0
+    }
+
+    .pills span {
+      display: block;
+      padding: 10px 20px;
+      border-radius: 99px;
+      border: 1.5px solid var(--line);
+      font-weight: 700;
+      transition: .2s
+    }
+
+    .pills input:checked+span {
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      border-color: transparent
+    }
+
+    .pills input:focus-visible+span {
+      outline: 3px solid var(--teal)
+    }
+
+    footer {
+      background: var(--navy);
+      color: #9fb6d6;
+      padding: 44px 0 calc(44px + env(safe-area-inset-bottom, 0px));
+      text-align: center;
+      font-size: .9rem
+    }
+
+    footer img {
+      height: 48px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 6px 16px;
+      margin-bottom: 14px
+    }
+
+    .wa {
+      position: fixed;
+      right: 20px;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+      z-index: 50;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--wa);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .4)
+    }
+
+    .wa:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--wa);
+      z-index: -1;
+      animation: ping 2.2s infinite
+    }
+
+    @keyframes ping {
+      to {
+        transform: scale(1.7);
+        opacity: 0
+      }
+    }
+
+    .wa svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor
+    }
+
+    .rv {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s, transform .7s
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: none
+    }
+
+    @media(max-width:860px) {
+      nav>a:not(.btn),
+      .nav-dropdown {
+        display: none
+      }
+
+      .hg,
+      .two,
+      form {
+        grid-template-columns: 1fr
+      }
+
+      .rings {
+        grid-template-columns: 1fr 1fr
+      }
+
+      section {
+        padding: 64px 0
+      }
+
+      .logo img {
+        height: 44px
+      }
+
+      header.sc .logo img {
+        height: 38px
+      }
+
+      .logo {
+        padding: 6px 14px;
+        border-radius: 13px
+      }
+
+      .g {
+        margin: 10px 0 0
+      }
+
+      .jl {
+        left: 11px
+      }
+
+      .st,
+      .st:nth-child(odd) {
+        width: 100%;
+        margin-left: 0;
+        padding: 0 0 48px 44px;
+        text-align: left
+      }
+
+      .st:before,
+      .st:nth-child(odd):before {
+        left: 0;
+        right: auto
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *:before,
+      *:after {
+        animation: none !important;
+        transition: none !important
+      }
+
+      h1 .w,
+      .rv,
+      .st {
+        opacity: 1;
+        transform: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header id="hd">
+    <a href="index.html" class="logo" aria-label="Sivora home"><img src="img/logo.webp" alt="Sivora – Build Innovate Grow"
+        width="700" height="212"></a>
+    <nav>
+      <a href="career.html" class="cur" aria-current="page">Career Guidance</a>
+
+      <div class="nav-dropdown">
+        <a href="index.html#services" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Services</a>
+        <div class="dropdown-menu">
+          <a href="index.html#software">Software Development</a>
+          <a href="index.html#ai-automation">AI &amp; Automation</a>
+          <div class="has-sub">
+            <a href="index.html#marketing">Digital Marketing <span>›</span></a>
+            <div class="submenu">
+              <a href="index.html#seo">SEO</a>
+              <a href="index.html#social-media">Social Media Management</a>
+              <a href="index.html#ads-campaigns">Ads &amp; Campaigns</a>
+            </div>
+          </div>
+          <div class="has-sub">
+            <a href="index.html#video-editing">Video Editing <span>›</span></a>
+            <div class="submenu">
+              <a href="index.html#instagram-reels">Instagram Reels</a>
+              <a href="index.html#cinematic-videos">Cinematic Videos</a>
+              <a href="index.html#ai-videos">AI Videos</a>
+              <a href="index.html#branding-videos">Branding Videos</a>
+            </div>
+          </div>
+          <a href="index.html#graphic-design">Graphic Design</a>
+        </div>
+      </div>
+
+      <a href="index.html#team">Products</a>
+      <a href="index.html#contact" class="btn p">Start a Project</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero" id="hero">
+      <div class="grid" aria-hidden="true"></div>
+      <div class="glow" aria-hidden="true"></div>
+      <div class="wrap hg">
+        <div>
+          <div class="tag">Sivora Interview Lab</div>
+          <h1 id="h1">Practise the interview <em>before it counts.</em></h1>
+          <p class="lead">Real mock interviews, scored feedback and a clear career roadmap, so you walk into the room
+            with confidence.</p>
+          <a href="#contact" class="btn p">Book a Session</a><a href="#path" class="btn g">See how it works</a>
+        </div>
+        <div class="sim" aria-hidden="true">
+          <div class="sh"><i></i><i></i><i></i>Mock interview<span>LIVE</span></div>
+          <div class="chat" id="chat"></div>
+          <div class="sc3">
+            <div>Clarity <b>0</b>
+              <div class="bar"><i></i></div>
+            </div>
+            <div>Confidence <b>0</b>
+              <div class="bar"><i></i></div>
+            </div>
+            <div>Content <b>0</b>
+              <div class="bar"><i></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mq" aria-hidden="true">
+      <div id="mq"></div>
+    </div>
+
+    <section id="path">
+      <div class="wrap">
+        <div class="tag">Your path</div>
+        <h2 class="rv">From confused to hired in five steps.</h2>
+        <div class="jr" id="jr">
+          <div class="jl"></div>
+          <div class="st"><small>01</small>
+            <h3>Discover</h3>
+            <p>We learn your education, interests and goals, and shortlist the roles that suit you.</p>
+          </div>
+          <div class="st"><small>02</small>
+            <h3>Plan</h3>
+            <p>A skill roadmap with clear priorities, so you know exactly what to learn next.</p>
+          </div>
+          <div class="st"><small>03</small>
+            <h3>Practise</h3>
+            <p>Mock interviews with technical and HR rounds, run like the real thing.</p>
+          </div>
+          <div class="st"><small>04</small>
+            <h3>Improve</h3>
+            <p>A scored feedback report with specific points to fix before the next round.</p>
+          </div>
+          <div class="st"><small>05</small>
+            <h3>Get hired</h3>
+            <p>Apply with a stronger resume, sharper answers and a plan for your job search.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="offer" style="background:var(--navy)">
+      <div class="wrap">
+        <div class="tag">What we offer</div>
+        <h2 class="rv">Two ways we get you ready.</h2>
+        <div class="two">
+          <article class="pn rv" data-n="01" id="mock-interviews">
+            <h3>Mock Interviews</h3>
+            <p>Face a real interviewer, answer real questions and get an honest score after every session.</p>
+            <ul>
+              <li>Technical round</li>
+              <li>HR round</li>
+              <li>Communication</li>
+              <li>Body language</li>
+              <li>Feedback report</li>
+            </ul>
+          </article>
+          <article class="pn rv" data-n="02" id="career-guidance">
+            <h3>Career Guidance</h3>
+            <p>One-to-one sessions to choose your direction, build skills and plan your first or next job.</p>
+            <ul>
+              <li>Career path</li>
+              <li>Skill roadmap</li>
+              <li>Resume tips</li>
+              <li>Job search plan</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="score">
+      <div class="wrap">
+        <div class="tag">Your scorecard</div>
+        <h2 class="rv">Feedback you can measure.</h2>
+        <div class="rings" id="rings">
+          <div>
+            <div class="ring"><svg viewBox="0 0 120 120" width="130" height="130">
+                <circle class="t" cx="60" cy="60" r="52" />
+                <circle class="v" cx="60" cy="60" r="52" data-v="86" />
+              </svg><b>0</b></div><span>Technical</span>
+          </div>
+          <div>
+            <div class="ring"><svg viewBox="0 0 120 120" width="130" height="130">
+                <circle class="t" cx="60" cy="60" r="52" />
+                <circle class="v" cx="60" cy="60" r="52" data-v="78" />
+              </svg><b>0</b></div><span>Communication</span>
+          </div>
+          <div>
+            <div class="ring"><svg viewBox="0 0 120 120" width="130" height="130">
+                <circle class="t" cx="60" cy="60" r="52" />
+                <circle class="v" cx="60" cy="60" r="52" data-v="92" />
+              </svg><b>0</b></div><span>Confidence</span>
+          </div>
+          <div>
+            <div class="ring"><svg viewBox="0 0 120 120" width="130" height="130">
+                <circle class="t" cx="60" cy="60" r="52" />
+                <circle class="v" cx="60" cy="60" r="52" data-v="81" />
+              </svg><b>0</b></div><span>Problem solving</span>
+          </div>
+        </div>
+        <p class="note">Sample scorecard for illustration.</p>
+      </div>
+    </section>
+
+    <section id="contact" style="background:var(--navy)">
+      <div class="wrap">
+        <div class="tag">Contact</div>
+        <h2 class="rv">Book your first session.</h2>
+        <form id="f" class="rv">
+          <input name="name" placeholder="Name" required aria-label="Name">
+          <input name="phone" type="tel" placeholder="Phone" aria-label="Phone">
+          <div class="pills full" role="radiogroup" aria-label="Session type">
+            <label><input type="radio" name="type" value="Mock Interview" checked><span>Mock Interview</span></label>
+            <label><input type="radio" name="type" value="Career Guidance"><span>Career Guidance</span></label>
+            <label><input type="radio" name="type" value="Both"><span>Both</span></label>
+          </div>
+          <textarea name="msg" rows="4" placeholder="Your education, target role or any questions"
+            aria-label="Message"></textarea>
+          <button class="btn p full" type="submit">Send on WhatsApp</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <img src="img/logo.webp" alt="Sivora"><br>
+    Build • Innovate • Grow
+  </footer>
+
+  <a class="wa" aria-label="Chat on WhatsApp" target="_blank" rel="noopener"
+    href="https://wa.me/919121766628?text=Hi%20Sivora%2C%20I%20want%20to%20know%20about%20career%20guidance%20and%20mock%20interviews">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path
+        d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.2 1.62 6.02L4 29l8.12-1.6a12 12 0 0 0 3.92.66C22.68 28.06 28 22.66 28 16.02 28 9.4 22.68 3 16.04 3zm0 22.04c-1.24 0-2.44-.3-3.5-.88l-.5-.28-4.82.94.98-4.7-.3-.52a9.9 9.9 0 0 1-1.5-5.28c0-5.5 4.5-10 10-10s10 4.5 10 10-4.4 9.72-10.36 9.72zm5.5-7.44c-.3-.16-1.8-.9-2.08-1-.28-.1-.48-.16-.68.16-.2.3-.78 1-.96 1.2-.18.2-.36.22-.66.08-.3-.16-1.28-.48-2.44-1.5-.9-.8-1.5-1.8-1.7-2.1-.18-.3 0-.46.14-.62.14-.14.3-.36.46-.54.16-.18.2-.3.3-.5.1-.2.06-.38-.02-.54-.08-.16-.68-1.64-.94-2.24-.24-.58-.5-.5-.68-.5h-.58c-.2 0-.54.08-.82.38-.28.3-1.08 1.06-1.08 2.58s1.1 3 1.26 3.2c.16.2 2.18 3.3 5.26 4.62.74.32 1.3.5 1.76.64.74.24 1.4.2 1.94.12.6-.1 1.8-.74 2.06-1.46.26-.72.26-1.34.18-1.46-.08-.14-.28-.22-.58-.38z" />
+    </svg>
+  </a>
+
+  <script>
+    (function () {
+      var $ = function (s, r) {return (r || document).querySelector(s)}, $$ = function (s, r) {return [].slice.call((r || document).querySelectorAll(s))};
+      var calm = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+      /* header + cursor glow */
+      var hd = $('#hd');
+      function sc() {hd.classList.toggle('sc', scrollY > 40)}
+      addEventListener('scroll', sc, {passive: true}); sc();
+      var hero = $('#hero'), gl = $('.glow');
+      hero.addEventListener('pointermove', function (e) {var r = hero.getBoundingClientRect(); gl.style.setProperty('--x', (e.clientX - r.left) + 'px'); gl.style.setProperty('--y', (e.clientY - r.top) + 'px')});
+
+      /* headline word reveal */
+      $$('#h1').forEach(function (h) {
+        var n = 0;
+        (function wrap(el) {
+          [].slice.call(el.childNodes).forEach(function (c) {
+            if (c.nodeType === 3) {
+              var f = document.createDocumentFragment();
+              c.textContent.split(/(\s+)/).forEach(function (t) {
+                if (!t.trim()) {f.appendChild(document.createTextNode(t)); return }
+                var s = document.createElement('span'); s.className = 'w'; s.textContent = t; s.style.animationDelay = (n++ * .09) + 's'; f.appendChild(s);
+              });
+              el.replaceChild(f, c);
+            } else wrap(c);
+          });
+        })(h);
+      });
+
+      /* live interview simulator */
+      var chat = $('#chat'), bars = $$('.sc3 .bar i'), nums = $$('.sc3 b');
+      var S = [
+        ['Tell me about yourself.', 'I am a fresher with a Laravel project, and I enjoy solving real business problems.', [82, 74, 88]],
+        ['Why should we hire you?', 'I learn fast, I finish what I start, and I explain my work clearly.', [78, 85, 80]],
+        ['Where do you see yourself in 3 years?', 'Leading a small team and building products people use every day.', [85, 80, 84]]
+      ];
+      var wait = function (ms) {return new Promise(function (r) {setTimeout(r, ms)})};
+      function bub(c) {var d = document.createElement('div'); d.className = 'bub ' + c; chat.appendChild(d); return d}
+      function setScores(v) {bars.forEach(function (b, i) {b.style.width = v[i] + '%'; nums[i].textContent = v[i]})}
+      async function run() {
+        var i = 0;
+        while (true) {
+          var s = S[i % S.length]; i++;
+          chat.innerHTML = ''; setScores([0, 0, 0]);
+          var q = bub('q'); q.textContent = s[0]; await wait(900);
+          var a = bub('a');
+          for (var k = 1; k <= s[1].length; k++) {a.textContent = s[1].slice(0, k); await wait(28)}
+          await wait(500); setScores(s[2]); await wait(3200);
+        }
+      }
+      if (calm) {var q0 = bub('q'); q0.textContent = S[0][0]; var a0 = bub('a'); a0.textContent = S[0][1]; setScores(S[0][2])} else run();
+
+      /* marquee */
+      var roles = ['Freshers', 'Students', 'Career switchers', 'Software roles', 'HR roles', 'Marketing roles', 'Design roles', 'Job seekers'];
+      var m = roles.concat(roles).map(function (r) {return '<span>' + r + '</span>'}).join('');
+      $('#mq').innerHTML = m + m;
+
+      /* journey path fills on scroll */
+      var jr = $('#jr'), steps = $$('.st');
+      function jp() {
+        var r = jr.getBoundingClientRect(), p = (innerHeight * .6 - r.top) / r.height;
+        jr.style.setProperty('--p', Math.max(0, Math.min(1, p)));
+        steps.forEach(function (s) {s.classList.toggle('on', s.getBoundingClientRect().top < innerHeight * .65)});
+      }
+      addEventListener('scroll', jp, {passive: true}); jp();
+
+      /* tilt on panels */
+      $$('.pn').forEach(function (p) {
+        if (calm) return;
+        p.addEventListener('pointermove', function (e) {
+          var r = p.getBoundingClientRect();
+          p.style.setProperty('--ry', ((e.clientX - r.left) / r.width - .5) * 10 + 'deg');
+          p.style.setProperty('--rx', (.5 - (e.clientY - r.top) / r.height) * 10 + 'deg');
+        });
+        p.addEventListener('pointerleave', function () {p.style.setProperty('--rx', 0); p.style.setProperty('--ry', 0)});
+      });
+
+      /* score rings count up */
+      var ro = new IntersectionObserver(function (e) {
+        e.forEach(function (x) {
+          if (!x.isIntersecting) return; ro.unobserve(x.target);
+          var c = $('.v', x.target), n = $('b', x.target), v = +c.dataset.v;
+          c.style.strokeDashoffset = 327 - 327 * v / 100;
+          var t0 = performance.now();
+          (function tick(t) {var k = Math.min(1, (t - t0) / 1600); n.textContent = Math.round(v * k); if (k < 1) requestAnimationFrame(tick)})(t0);
+        });
+      }, {threshold: .4});
+      $$('.ring').forEach(function (r) {ro.observe(r)});
+
+      /* reveal */
+      var io = new IntersectionObserver(function (e) {e.forEach(function (x) {if (x.isIntersecting) {x.target.classList.add('in'); io.unobserve(x.target)} })}, {threshold: .15});
+      $$('.rv').forEach(function (el) {io.observe(el)});
+
+      /* form -> WhatsApp */
+      $('#f').onsubmit = function (e) {
+        e.preventDefault(); var f = e.target;
+        var t = 'Hi Sivora, I am ' + f.name.value + '.\nPhone: ' + f.phone.value + '\nInterested in: ' + f.type.value + '\n\n' + f.msg.value;
+        window.open('https://wa.me/919121766628?text=' + encodeURIComponent(t), '_blank');
+      };
+    })();
+  
+      var hd = document.getElementById('hd');
+      function sc() { hd.classList.toggle('sc', window.scrollY > 40); }
+      window.addEventListener('scroll', sc, { passive: true }); sc();
+
+      document.querySelectorAll('.dropdown-toggle').forEach(function (toggle) {
+        toggle.addEventListener('click', function (event) {
+          var parent = toggle.closest('.nav-dropdown');
+          if (window.matchMedia('(hover: none)').matches) {
+            event.preventDefault();
+            var isOpen = parent.classList.contains('open');
+            document.querySelectorAll('.nav-dropdown').forEach(function (item) { item.classList.remove('open'); });
+            parent.classList.toggle('open', !isOpen);
+            toggle.setAttribute('aria-expanded', String(!isOpen));
+          }
+        });
+      });
+      document.querySelectorAll('.has-sub > a').forEach(function (toggle) {
+        toggle.addEventListener('click', function (event) {
+          if (window.matchMedia('(hover: none)').matches) {
+            event.preventDefault();
+            var parent = toggle.closest('.has-sub');
+            parent.classList.toggle('open');
+          }
+        });
+      });
+</script>
+</body>
+
+</html>
